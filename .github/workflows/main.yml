@@ -21,12 +21,12 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       # Publish
-      - name: publish on version change Infoware.SensitiveDataLogger
-        id: publish_nuget_infoware_sensitivedataLogger
+      - name: publish on version change Infoware.AWS.Cognito.Authorizer
+        id: publish_nuget_infoware_aws_cognito_authorizer
         uses: vicosanz/publish-nuget@v2.5.7
         with:
           # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: Infoware.SensitiveDataLogger/Infoware.SensitiveDataLogger.csproj
+          PROJECT_FILE_PATH: Infoware.AWS.Cognito.Authorizer/Infoware.AWS.Cognito.Authorizer.csproj
           
           # NuGet package id, used for version detection & defaults to project name
           # PACKAGE_NAME: Core
