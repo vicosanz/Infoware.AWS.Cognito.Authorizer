@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>Victor Sanchez</Authors>
+    <Company>Infoware Soluciones</Company>
+    <Description>Handle [Authorize] for Controllers that need to enable security through claims.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/vicosanz/Infoware.SRI</RepositoryUrl>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ApiGatewayAuthorizer\ApiGatewayAuthorizerHandler.cs" />
+    <Compile Remove="ApiGatewayAuthorizer\ApiGatewayAuthorizerTestHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Infoware.SensitiveDataLogger" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.21.0" />
+  </ItemGroup>
+
+</Project>
