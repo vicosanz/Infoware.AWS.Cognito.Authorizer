@@ -9,7 +9,7 @@
     <Description>Handle [Authorize] for Controllers that need to enable security through claims.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/vicosanz/Infoware.AWS.Cognito.Authorizer</RepositoryUrl>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
