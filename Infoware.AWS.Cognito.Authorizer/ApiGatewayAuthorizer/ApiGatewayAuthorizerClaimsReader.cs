@@ -25,14 +25,17 @@ namespace Infoware.AWS.Cognito.Authorizer.ApiGatewayAuthorizer
                 {
                     var userId = user.FindFirst(ApiGatewayAuthorizerClaims.UserId);
                     var userName = user.FindFirst(ApiGatewayAuthorizerClaims.UserName);
-                    var groups = user.FindFirst(ApiGatewayAuthorizerClaims.Groups);
+                    var groups = user.FindAll(ApiGatewayAuthorizerClaims.Groups);
                     var email = user.FindFirst(ApiGatewayAuthorizerClaims.Email);
                     var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
                     var idToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
                     List<string> listgroups = new();
-                    if (groups?.Value != null)
+                    if (groups?.Any() ?? false)
                     {
-                        listgroups = groups.Value.Split(',').ToList();
+                        foreach(var group in groups)
+                        {
+                            listgroups.AddRange(group.Value.Split(',').ToList());
+                        }
                     }
                     _openIdData = new CognitoData()
                     {
