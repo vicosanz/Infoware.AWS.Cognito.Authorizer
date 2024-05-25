@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "Infoware.AWS.Cognito.Authorizer.sln",
+    "projects": [
+      "Infoware.AWS.Cognito.Authorizer\\Infoware.AWS.Cognito.Authorizer.csproj"
+    ]
+  }
+}

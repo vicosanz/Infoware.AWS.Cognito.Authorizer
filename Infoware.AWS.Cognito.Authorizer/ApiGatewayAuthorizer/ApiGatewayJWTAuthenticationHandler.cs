@@ -14,9 +14,8 @@ namespace Infoware.AWS.Cognito.Authorizer.ApiGatewayAuthorizer
         public ApiGatewayJWTAuthenticationHandler(
             IOptionsMonitor<ApiGatewayJWTAuthenticationSchemeOptions> options,
             ILoggerFactory logger,
-            UrlEncoder encoder,
-            ISystemClock clock)
-            : base(options, logger, encoder, clock)
+            UrlEncoder encoder)
+            : base(options, logger, encoder)
         {
         }
 
@@ -72,7 +71,7 @@ namespace Infoware.AWS.Cognito.Authorizer.ApiGatewayAuthorizer
             }
             var token = authorizationHeader.First();
             const string AuthorizationBearerKey = "Bearer";
-            if (token.StartsWith(AuthorizationBearerKey, StringComparison.OrdinalIgnoreCase))
+            if (token != null && token.StartsWith(AuthorizationBearerKey, StringComparison.OrdinalIgnoreCase))
             {
                 token = token[AuthorizationBearerKey.Length..].Trim();
             }

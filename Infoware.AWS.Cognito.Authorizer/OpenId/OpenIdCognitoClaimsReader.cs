@@ -1,7 +1,5 @@
-﻿using Infoware.AWS.Cognito.Authorizer;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Infoware.AWS.Cognito.Authorizer.OpenId
@@ -19,7 +17,7 @@ namespace Infoware.AWS.Cognito.Authorizer.OpenId
 
         public async Task<CognitoData> GetOpenIdDataAsync()
         {
-            if (_openIdData == null)
+            if (_openIdData == null && _httpContextAccessor.HttpContext != null)
             {
                 var user = _httpContextAccessor.HttpContext.User;
                 if (user?.Identity?.IsAuthenticated ?? false)

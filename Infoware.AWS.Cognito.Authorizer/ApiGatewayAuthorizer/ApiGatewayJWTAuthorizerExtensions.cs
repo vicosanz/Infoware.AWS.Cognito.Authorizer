@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infoware.AWS.Cognito.Authorizer.ApiGatewayAuthorizer;
 
@@ -36,7 +31,7 @@ public static class ApiGatewayJWTAuthorizerExtensions
 
     private static AuthenticationBuilder AddApiGatewayJWTAuthorizerSchemeInternal(
         this AuthenticationBuilder builder,
-        string? authenticationScheme = null,
+        string authenticationScheme,
         Action<ApiGatewayJWTAuthenticationSchemeOptions>? configureOptions = null)
     {
         return builder
