@@ -14,8 +14,9 @@ namespace Infoware.AWS.Cognito.Authorizer.ApiGatewayAuthorizer
         public ApiGatewayJWTAuthenticationHandler(
             IOptionsMonitor<ApiGatewayJWTAuthenticationSchemeOptions> options,
             ILoggerFactory logger,
-            UrlEncoder encoder)
-            : base(options, logger, encoder)
+            UrlEncoder encoder,
+            ISystemClock clock)
+            : base(options, logger, encoder, clock)
         {
         }
 
