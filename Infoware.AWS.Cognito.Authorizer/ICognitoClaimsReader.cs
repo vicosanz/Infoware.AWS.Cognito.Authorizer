@@ -1,7 +1,6 @@
-﻿namespace Infoware.AWS.Cognito.Authorizer
+﻿namespace Infoware.AWS.Cognito.Authorizer;
+
+public interface ICognitoClaimsReader
 {
-    public interface ICognitoClaimsReader
-    {
-        Task<CognitoData> GetOpenIdDataAsync();
-    }
+    CognitoData? CognitoData { get; }
 }
