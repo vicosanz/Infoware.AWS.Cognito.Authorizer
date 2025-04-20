@@ -2,5 +2,5 @@
 
 public interface ICognitoClaimsReader
 {
-    Task<CognitoData?> GetCognitoDataAsync();
+    Task<CognitoData?> GetCognitoDataAsync(CancellationToken cancellationToken);
 }

@@ -7,7 +7,7 @@ public class ApiGatewayAuthorizerClaimsReader(
     IHttpContextAccessor httpContextAccessor, 
     ILogger<ApiGatewayAuthorizerClaimsReader> logger) : ICognitoClaimsReader
 {
-    private CognitoData? CognitoData = null;
+    private CognitoData? cognitoData = null;
 
     private CognitoData? GetOpenIdData()
     {
@@ -41,16 +41,16 @@ public class ApiGatewayAuthorizerClaimsReader(
         return null;
     }
 
-    public Task<CognitoData?> GetCognitoDataAsync()
+    public Task<CognitoData?> GetCognitoDataAsync(CancellationToken cancellationToken)
     {
-        if (CognitoData is null)
+        if (cognitoData is null)
         {
-            CognitoData = GetOpenIdData();
-            if (CognitoData != null)
+            cognitoData = GetOpenIdData();
+            if (cognitoData != null)
             {
-                logger.LogInformation("User found: {@CognitoData}", CognitoData);
+                logger.LogInformation("User found: {@CognitoData}", cognitoData);
             }
         }
-        return Task.FromResult(CognitoData);
+        return Task.FromResult(cognitoData);
     }
 }
