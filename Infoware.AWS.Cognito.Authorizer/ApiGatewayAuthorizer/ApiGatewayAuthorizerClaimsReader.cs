@@ -3,29 +3,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Infoware.AWS.Cognito.Authorizer.ApiGatewayAuthorizer;
 
-public class ApiGatewayAuthorizerClaimsReader : ICognitoClaimsReader
+public class ApiGatewayAuthorizerClaimsReader(
+    IHttpContextAccessor httpContextAccessor, 
+    ILogger<ApiGatewayAuthorizerClaimsReader> logger) : ICognitoClaimsReader
 {
-    public CognitoData? CognitoData { get; }
-
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly ILogger<ApiGatewayAuthorizerClaimsReader> _logger;
-
-    public ApiGatewayAuthorizerClaimsReader(IHttpContextAccessor httpContextAccessor, ILogger<ApiGatewayAuthorizerClaimsReader> logger)
-    {
-        _httpContextAccessor = httpContextAccessor;
-        _logger = logger;
-        CognitoData = GetOpenIdData();
-        if (CognitoData != null)
-        {
-            _logger.LogInformation("User found: {@CognitoData}", CognitoData);
-        }
-    }
+    private CognitoData? CognitoData = null;
 
     private CognitoData? GetOpenIdData()
     {
-        if (_httpContextAccessor?.HttpContext != null)
+        if (httpContextAccessor?.HttpContext != null)
         {
-            var user = _httpContextAccessor.HttpContext.User;
+            var user = httpContextAccessor.HttpContext.User;
             if (user?.Identity?.IsAuthenticated ?? false)
             {
                 var userId = user.FindFirst(ApiGatewayAuthorizerClaims.UserId);
@@ -51,5 +39,18 @@ public class ApiGatewayAuthorizerClaimsReader : ICognitoClaimsReader
             }
         }
         return null;
+    }
+
+    public Task<CognitoData?> GetCognitoDataAsync()
+    {
+        if (CognitoData is null)
+        {
+            CognitoData = GetOpenIdData();
+            if (CognitoData != null)
+            {
+                logger.LogInformation("User found: {@CognitoData}", CognitoData);
+            }
+        }
+        return Task.FromResult(CognitoData);
     }
 }

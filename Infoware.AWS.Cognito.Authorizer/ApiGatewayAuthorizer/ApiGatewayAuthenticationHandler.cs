@@ -27,7 +27,7 @@ public class ApiGatewayAuthenticationHandler<TOptions>(
             var principal = new ClaimsPrincipal(claimsIdentity);
             return Task.FromResult(
                 AuthenticateResult.Success(
-                    new AuthenticationTicket(principal, null, ApiGatewayJWTAuthorizerDefaults.AuthenticationScheme)));
+                    new AuthenticationTicket(principal, ApiGatewayJWTAuthorizerDefaults.AuthenticationScheme)));
         }
         catch (Exception exception)
         {

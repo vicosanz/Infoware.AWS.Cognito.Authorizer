@@ -2,5 +2,5 @@
 
 public interface ICognitoClaimsReader
 {
-    CognitoData? CognitoData { get; }
+    Task<CognitoData?> GetCognitoDataAsync();
 }
